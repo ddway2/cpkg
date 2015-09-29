@@ -5,4 +5,4 @@ MYDIR=$(dirname $0)
 MYDIR=$(cd $MYDIR && pwd)
 MYTOPDIR=$(cd $MYDIR/.. && pwd)
 
-sudo apt-get install -y lintian rsync pkg-config tinycdb apt-file
+sudo apt-get install -y lintian rsync pkg-config tinycdb apt-file debhelper
