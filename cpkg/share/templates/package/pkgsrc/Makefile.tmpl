@@ -8,20 +8,18 @@
 %     fi
 # $NetBSD$
 
-PKGNAME=	%{ ${PKG_NAME} }%-%{ ${PKG_VER} }%
+DISTNAME=	%{ ${PKG_NAME} }%-%{ ${PKG_VER} }%
 CATEGORIES=	%{ ${PKG_CAT} }%
 % if (($PKG_FROM_GIT)); then
-HOMEPAGE=	%{ ${PKG_GIT_URL} }%
-GITCOMMIT=	%{ ${PKG_GIT_COMMIT} }%
-DISTNAME=	${GITCOMMIT}.zip
-MASTER_SITES=	%{ ${PKG_GIT_FETCH_URL} }%/
 %     if (($PKG_FROM_GITHUB)); then
-DIST_SUBDIR=	%{ ${PKG_NAME} }%
+MASTER_SITES=	${MASTER_SITE_GITHUB:=%{ ${PKG_GITHUB_USER} }%/}
+GITHUB_PROJECT=	%{ ${PKG_NAME} }%
+GITHUB_TAG=	%{ ${PKG_GIT_COMMIT} }%
 %     fi
 % fi
-EXTRACT_SUFX=	# none
 
 MAINTAINER=	%{ ${PKG_AUTHOR_EMAIL} }%
+HOMEPAGE=	%{ ${PKG_GIT_URL} }%
 COMMENT=	%{ ${PKG_SHORTDESC} }%
 LICENSE=	mit
 % if ((${#PKG_DEPS[@]})); then
@@ -31,7 +29,7 @@ DEPENDS+=	%{ $DEP }%
 %     done
 % fi
 
-WRKSRC=		${WRKDIR}/%{ ${PKG_NAME} }%-${GITCOMMIT}
+WRKSRC=		${WRKDIR}/%{ ${PKG_NAME} }%-%{ ${PKG_GIT_COMMIT} }%
 % CFGFILES=$(cp_find_rel $PKG_SOURCEDIR/etc)
 % if [[ -n "$CFGFILES" ]]; then
 
